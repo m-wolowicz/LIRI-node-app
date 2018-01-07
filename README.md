@@ -1,12 +1,14 @@
 # LIRI-node-app
 
+LIRI: The Language Interpretation and Recognition Interface.
+
 Trilogy Education Services Full-Stack Web Developer Program
 
 University of Miami Cohort - 201710FSF3
 
 Week 13 Homework Assignment:
 
-Create a Language_ Interpretation and Recognition Interface command line node application.
+Create a Language Interpretation and Recognition Interface command line node application.
 
 ### Overview
 
