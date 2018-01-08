@@ -68,6 +68,7 @@
 			);
 	}
 
+
 // FUNCTIONS
 // ============
 
@@ -103,6 +104,10 @@
 									"\n";
 					//Log each tweet to the console.
 					console.log(output);
+
+					//BONUS Append data to log.txt file
+					appendToLogFile(output);
+
 				}
 			} else {
 				console.log(error);
@@ -150,6 +155,9 @@
 								"\n";
 
 				console.log(output);
+
+				//BONUS Append data to log.txt file
+				appendToLogFile(output);
 			}
 		});
 	}
@@ -197,6 +205,10 @@
 								"\n";
 
 				console.log(output);
+
+				//BONUS Append data to log.txt file
+				appendToLogFile(output);
+
 			} else {
 				console.log('error:', error); // Print the error if one occurred
 				return;
@@ -262,3 +274,26 @@
 			}
 		});
 	}
+
+	// =====
+	// BONUS
+	// =====
+		//Function that appends data to a log file
+		function appendToLogFile(data) {
+
+			// Add a few spaces
+			fs.appendFile("log.txt", '\r\n\r\n');
+
+			//Add data
+			fs.appendFile("log.txt", JSON.stringify(data), function(err) {
+
+				// If an error was experienced we say it.
+				if (err) {
+					console.log(err);
+				}
+				// If no error is experienced, we'll log the phrase "Content Added" to our node console.
+				else {
+					console.log("The 'log.txt' has been updated and more content has been added!");
+				}
+			});
+		}
