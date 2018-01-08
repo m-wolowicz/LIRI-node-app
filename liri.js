@@ -206,5 +206,59 @@
 
 	//doWhatItSays Function
 	function doWhatItSays() {
-		console.log("...Doing What It Says...");
+
+		//Use fs to read the random file
+		fs.readFile("random.txt", "utf8", function(error, data) {
+
+			//If there isn't an error
+			if (!error) {
+
+				//get the data from the file and split it into an array
+				var randomFileText = data.split(",");
+
+				//Grab each portion of the new array and save as new input command and input title
+				var randomInputCommand = randomFileText[0];
+				var randomInputTitle = randomFileText[1];
+
+				//Use the new variables to run the same swith statement and call all functions as above
+					//Switch statement that calls each function depending on user input
+					switch (randomInputCommand) {
+
+						//Option 1: node liri.js my-tweets
+						case "my-tweets":
+							//Call Function for generating tweets from Twitter API
+							myTweets();
+							break;
+
+						//Option 2: node liri.js spotify-this-song '<song name here>'
+						case "spotify-this-song":
+							//Call Function for generating song info from Spotify API
+							//User Input for song and movie titles
+							inputTitles = randomInputTitle;
+							spotifyThis();
+							break;
+
+						//Option 3: node liri.js movie-this '<movie name here>'
+						case "movie-this":
+							//Call Function for generating movie info from OMDB API
+							//User Input for song and movie titles
+							inputTitles = randomInputTitle;
+							movieThis();
+							break;
+
+						//Default "else" option, which console.logs the instructions to user in case of bad command
+						default: console.log(
+							'\n ==== THAT IS NOT A VALID COMMAND ====' +
+							'\n PLEASE RUN ONE OF THE COMMANDS BELOW:' +
+							'\n node liri.js my-tweets' +
+							'\n node liri.js spotify-this-song "any song name"' +
+							'\n node liri.js movie-this "any movie name"' +
+							'\n node liri.js do-what-it-says' +
+							'\n'
+							);
+					}
+			} else {
+				throw error;
+			}
+		});
 	}
