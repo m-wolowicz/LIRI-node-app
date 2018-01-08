@@ -156,7 +156,52 @@
 
 	//movieThis Function
 	function movieThis() {
-		console.log("...Retrieving your Mpvie...");
+		//Logging a separator to place the results under
+		console.log("\n ==== HERE IS YOUR MOVIE ====\n");
+
+		//Retrieve the OMDB key
+		var omdbKey = keys.omdbKey.key;
+
+		//Get the user input for the movie title
+		var movieTitle = inputTitles;
+
+		//If the user doesn't input a movie title
+		if(!movieTitle) {
+			//Then the movie title will be "Mr Nobody"
+			movieTitle = "mr nobody";
+		}
+
+		//Store the movie title into a new Variable
+		var params = movieTitle;
+
+		//Use request to retrieve the information from OMDB api
+		request("http://www.omdbapi.com/?t=" + movieTitle + "&y=&plot=short&apikey=" + omdbKey, function (error, response, body) {
+
+			//If there is no error, return information
+			if (!error && response.statusCode == 200) {
+
+				//Parse JSON data into new Variable
+				var data = JSON.parse(body);
+
+				//Console.log the movie information
+				var output =	" ---- You searched for: " + params.toUpperCase() + " ----" +
+								"\n   Movie Title: " + data.Title +
+								"\n   Release Year: " + data.Year +
+								"\n   IMDB Rating: " + data.Ratings[0].Value +
+								"\n   Rotten Tomatoes Rating: " + data.Ratings[1].Value +
+								"\n   Production Country: " + data.Country +
+								"\n   Language: " + data.Language +
+								"\n   Plot: " + data.Plot +
+								"\n   Actors: " + data.Actors +
+								"\n --------------------------------" +
+								"\n";
+
+				console.log(output);
+			} else {
+				console.log('error:', error); // Print the error if one occurred
+				return;
+			}
+		});
 	}
 
 	//doWhatItSays Function
