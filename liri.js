@@ -15,7 +15,7 @@
 
 		//Include the node modules for twitter spotify
 		var Twitter = require("twitter");
-		var spotify = require("node-spotify-api");
+		var Spotify = require("node-spotify-api");
 
 	// ===============
 	// INPUT VARIABLES
@@ -56,7 +56,7 @@
 			doWhatItSays();
 			break;
 
-		//Default "else" option, which console.logs the instructions to user
+		//Default "else" option, which console.logs the instructions to user in case of bad command
 		default: console.log(
 			'\n ==== THAT IS NOT A VALID COMMAND ====' +
 			'\n PLEASE RUN ONE OF THE COMMANDS BELOW:' +
@@ -74,7 +74,7 @@
 	//myTweets Function
 	function myTweets() {
 		//Logging a separator to place the results under
-		console.log("\n==== HERE ARE YOUR TWEETS ====\n");
+		console.log("\n ==== HERE ARE YOUR TWEETS ====\n");
 
 		//Creating a new Twitter client using the keys file
 		var client = new Twitter({
@@ -97,8 +97,8 @@
 					var tweetText = tweets[i].text;
 					//Variable containing format for each tweet
 					var output = 	"\n ---- Tweet Number " + i + " ----" +
-									"\n Tweet: " + tweetText +
-									"\n Posted on: " + timeCreated +
+									"\n   " + tweetText +
+									"\n   Posted on: " + timeCreated +
 									"\n --------------------------------" +
 									"\n";
 					//Log each tweet to the console.
@@ -112,7 +112,46 @@
 
 	//spotifyThis Function
 	function spotifyThis() {
-		console.log("...Retrieving your Song...");
+		//Logging a separator to place the results under
+		console.log("\n ==== HERE IS YOUR SONG ====\n");
+
+		//Creating a new spotify variable using the keys file
+		var spotify = new Spotify({
+			id: keys.spotifyKeys.id,
+			secret: keys.spotifyKeys.secret
+		});
+
+		//Get the userinput for the song title and store in new Variable
+		var songTitle = inputTitles;
+
+		//If the user doesn't input a song
+		if(!songTitle){
+			//then the songtitle will be The Sign
+			songTitle = "The Sign";
+		}
+
+		//Store the song title as a parameter for the search:
+		var params = songTitle;
+
+		//Search Spotify api
+		spotify.search({ type: 'track', query: params }, function(err, data) {
+
+			//If there is an error, log the error
+			if (err) {
+				return console.log('Error occurred: ' + err);
+			} else {
+				//Otherwise, log the song information:
+				var output = 	" ---- You searched for: " + params.toUpperCase() + " ----" +
+								"\n   Artist: " + data.tracks.items[0].album.artists[0].name +
+								"\n   Song Name: " + params +
+								"\n   Album: " + data.tracks.items[0].album.name +
+								"\n   Preview link on Spotify: " + data.tracks.items[0].album.external_urls.spotify +
+								"\n --------------------------------" +
+								"\n";
+
+				console.log(output);
+			}
+		});
 	}
 
 	//movieThis Function
