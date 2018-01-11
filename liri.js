@@ -281,9 +281,6 @@
 		//Function that appends data to a log file
 		function appendToLogFile(data) {
 
-			// Add a few spaces
-			fs.appendFile("log.txt", '\r\n\r\n');
-
 			//Add data
 			fs.appendFile("log.txt", JSON.stringify(data), function(err) {
 

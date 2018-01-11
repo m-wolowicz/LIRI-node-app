@@ -1,14 +1,8 @@
 {
-  "name": "LIRI-node-app",
+  "name": "liri-node-app",
   "version": "1.0.0",
-  "description": "Trilogy Education Services Full-Stack Web Developer Program",
+  "description": "LIRI: The Language Interpretation and Recognition Interface.",
   "main": "keys.js",
-  "dependencies": {
-    "node-spotify-api": "^1.0.7",
-    "request": "^2.83.0",
-    "twitter": "^1.7.1"
-  },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,11 +10,19 @@
     "type": "git",
     "url": "git+https://github.com/m-wolowicz/LIRI-node-app.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "node",
+    "liri"
+  ],
+  "author": "Melissa Wolowicz",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/m-wolowicz/LIRI-node-app/issues"
   },
-  "homepage": "https://github.com/m-wolowicz/LIRI-node-app#readme"
+  "homepage": "https://github.com/m-wolowicz/LIRI-node-app#readme",
+  "dependencies": {
+    "node-spotify-api": "^1.0.7",
+    "request": "^2.83.0",
+    "twitter": "^1.7.1"
+  }
 }
